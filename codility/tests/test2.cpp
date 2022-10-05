@@ -19,7 +19,7 @@ Example:
 int solution(int N)
 {
     std::string const S = std::to_string(N);   
-    int ret = 0;
+    int ret = INT32_MIN;
     for (auto i = S.length() - 1; i != 0; i--) { // NOTE: size_t is unsigned, i >= 0 is always true
         if (S[i] == '5') {
             std::string temp = S;
@@ -34,6 +34,7 @@ int solution(int N)
 int main (void)
 {  
     std::cout << "input: -500. result: " << solution(-500) << std::endl; 
+    std::cout << "input: -515. result: " << solution(-515) << std::endl; 
     std::cout << "input: 1539. result: " << solution(1539) << std::endl; 
     std::cout << "input: 1535. result: " << solution(1535) << std::endl; 
     return 0;
