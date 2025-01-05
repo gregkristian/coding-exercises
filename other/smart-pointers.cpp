@@ -11,14 +11,20 @@ class Car
         int mileage;
 };
 
+void reseatPtr(std::unique_ptr<Car>& car) {  // Pass by reference
+    car = std::unique_ptr<Car>();            // This will destroy the original one
+}
+
 int main()
 {   
     auto car_p1 = std::make_unique<Car>();    // OWNING  
     car_p1->mileage = 555;
     printf("car_p1.mileage=%d\n", car_p1->mileage); // 555
+
+   std::cout << "car_p1=" << car_p1.get() << "\n";  // Adress in the heap
     
     // Get the raw pointer. NON-OWNING
-    auto car_p2 = car_p1.get();
+    auto car_p2 = car_p1.get(); // Get the address in the heap
     printf("car_p2.mileage=%d\n", car_p2->mileage); // 555
 
     // Get a copy of the raw pointer. NON-OWNING
@@ -30,6 +36,11 @@ int main()
     //printf("car_p3.mileage=%d\n", car_p3->mileage); // 555
 
     //std move
+
+    // Reseat
+    reseatPtr(car_p1);
+
+    std::cout << "car_p1=" << car_p1.get() << "\n";  // 0x0. It's destroyed at this point
 
     return 0;
 }
